@@ -21,14 +21,7 @@ module OData
 		  # need the class name to build class
 		  return nil    if @klass_name.nil?
 		      
-			# return if we can find constant corresponding to class name
-			if Object.const_defined? @klass_name
-				@klass = @klass_name.constantize
-				return @klass
-			end
-		      
-			Object.const_set(@klass_name, Class.new.extend(ActiveSupport::JSON))
-		  @klass = @klass_name.constantize
+			@klass = Class.new.extend(ActiveSupport::JSON)
  
 			add_methods(@klass)
 			add_nav_props(@klass)
